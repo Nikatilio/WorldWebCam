@@ -3,7 +3,7 @@ package com.enzo.wwcam.wct
 import com.enzo.wwcam.model.WebcamInfo
 import com.enzo.wwcam.model.WebcamResponse
 import com.enzo.wwcam.network.NetworkManager
-import com.enzo.wwcam.wct.params.WctOrder
+import com.enzo.wwcam.wct.params.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,17 +14,49 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager): WctApi
     val url = "https://webcamstravel.p.rapidapi.com/webcams/list/"
 
     override var categories = ArrayList<String>()
-    override var countries = ArrayList<String>()
+    override var countries = ArrayList<WctCountry>()
     override var regions = ArrayList<String>()
     override var continents = ArrayList<String>()
     override var properties = ArrayList<String>()
+    override val fieldsToShow = ArrayList<String>()
+    override val orderParams = ArrayList<String>()
+    override val webcamFields = ArrayList<String>()
+    override val languages = ArrayList<String>()
+
+    val selectedCountries = ArrayList<WctCountry>()
+
 
     var excludedIds = ArrayList<String>()
     var order = WctOrder.DESC
     var limit = 10
 
+    init {
+        WctShow.values().forEach {
+            fieldsToShow.add(it.value)
+        }
+
+        WctOrder.values().forEach {
+            orderParams.add(it.value)
+        }
+
+        WctWebcamFields.values().forEach {
+            webcamFields.add(it.value)
+        }
+
+        WctLanguage.values().forEach {
+            languages.add(it.value)
+        }
+    }
+
     override fun prepare() {
         loadValues()
+    }
+
+    override fun setSelectedCountries(countryIndexes: Array<Int>) {
+        selectedCountries.clear()
+        countryIndexes.forEach {
+            selectedCountries.add(countries[it])
+        }
     }
 
     fun setExcludedWebcamIds(excludedIds: ArrayList<String>) {
@@ -54,7 +86,7 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager): WctApi
     }
 
     override fun load(callback: (Array<WebcamInfo>) -> Unit) {
-        networkManager.build(url, "/webcams/list/category=building", object: Callback<WebcamResponse> {
+        networkManager.build(url, "/webcams/list/country=" + selectedCountries[0].id, object: Callback<WebcamResponse> {
             override fun onFailure(call: Call<WebcamResponse>, t: Throwable) {
             }
 
@@ -108,7 +140,8 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager): WctApi
                     }
                     result?.countries?.let {
                         for (country in it) {
-                            countries.add(country.name)
+                            countries.add(WctCountry(country.id, country.name))
+
                         }
                     }
                     result?.regions?.let {

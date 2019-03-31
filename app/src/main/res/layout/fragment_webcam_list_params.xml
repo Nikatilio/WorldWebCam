@@ -12,130 +12,6 @@
             android:focusable="true"
             android:focusableInTouchMode="true">
 
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/regionSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/propertySpinner" app:layout_constraintHorizontal_bias="1.0"/>
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/request_fields_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/limit_edittext"/>
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/webcam_info_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView14"
-                app:layout_constraintTop_toBottomOf="@+id/request_fields_spinner"/>
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/languageSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView15"
-                app:layout_constraintTop_toBottomOf="@+id/webcam_info_spinner"/>
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/orderSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/esclude_webcam_ids_textmultiline"/>
-
-        <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Region"
-                app:layout_constraintBottom_toBottomOf="@+id/regionSpinner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/regionSpinner"/>
-
-        <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Exclude webcam"
-                app:layout_constraintBottom_toBottomOf="@+id/esclude_webcam_ids_textmultiline"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/esclude_webcam_ids_textmultiline"/>
-
-        <Button
-                android:id="@+id/area_select_button"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Select"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-                android:id="@+id/area_coordinates_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Empty"
-                app:layout_constraintBottom_toBottomOf="@+id/area_select_button"
-                app:layout_constraintEnd_toStartOf="@+id/area_select_button"
-                app:layout_constraintStart_toEndOf="@+id/textView7"
-                app:layout_constraintTop_toTopOf="@+id/area_select_button"/>
-
-        <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="Category"
-                app:layout_constraintBottom_toTopOf="@+id/continentSpinner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/categorySpinner"/>
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/categorySpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/area_select_button" android:focusable="auto"/>
-
         <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
@@ -143,21 +19,16 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Continent"
-                app:layout_constraintBottom_toTopOf="@+id/countrySpinner"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/continentSpinner"/>
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                app:layout_constraintTop_toTopOf="@+id/continentSpinner"
+                app:layout_constraintBottom_toBottomOf="@+id/continentSpinner"/>
+        <Spinner
                 android:id="@+id/continentSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/categorySpinner" app:layout_constraintHorizontal_bias="1.0"/>
-
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"/>
         <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
@@ -167,61 +38,48 @@
                 app:layout_constraintBottom_toBottomOf="@+id/countrySpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/countrySpinner"/>
-
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/countrySpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/continentSpinner"
-                app:layout_constraintHorizontal_bias="1.0"/>
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/propertySpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/position_select_button"
-                app:layout_constraintHorizontal_bias="1.0"/>
-
+                app:layout_constraintTop_toBottomOf="@+id/continentSpinner" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"/>
         <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Nearby"
-                app:layout_constraintBottom_toBottomOf="@+id/position_select_button"
+                android:text="Region"
+                app:layout_constraintBottom_toBottomOf="@+id/regionSpinner"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/position_select_button"/>
-
-        <Button
-                android:id="@+id/position_select_button"
+                app:layout_constraintTop_toTopOf="@+id/regionSpinner"/>
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/regionSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/properties_view_item_height"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Select"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/countrySpinner"/>
 
         <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Area"
-                app:layout_constraintBottom_toBottomOf="@+id/area_select_button"
+                android:text="Category"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/area_select_button"/>
-
+                app:layout_constraintTop_toTopOf="@+id/categorySpinner"
+                app:layout_constraintBottom_toBottomOf="@+id/categorySpinner"/>
+        <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/properties_view_item_height"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:focusable="auto" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/regionSpinner"/>
         <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
@@ -231,7 +89,47 @@
                 app:layout_constraintBottom_toBottomOf="@+id/propertySpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/propertySpinner"/>
-
+        <Spinner
+                android:id="@+id/propertySpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/properties_view_item_height"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/categorySpinner" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"/>
+        <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Webcam info"
+                app:layout_constraintBottom_toBottomOf="@+id/webcamFieldsSpinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/webcamFieldsSpinner"/>
+        <Spinner
+                android:id="@+id/webcamFieldsSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/properties_view_item_height"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/propertySpinner"/>
+        <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Fields to show"
+                app:layout_constraintBottom_toBottomOf="@+id/fieldsToShowSpinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fieldsToShowSpinner"/>
+        <Spinner
+                android:id="@+id/fieldsToShowSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/properties_view_item_height"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/webcamFieldsSpinner"/>
         <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
@@ -241,7 +139,13 @@
                 app:layout_constraintBottom_toBottomOf="@+id/orderSpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/orderSpinner"/>
-
+        <Spinner
+                android:id="@+id/orderSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/properties_view_item_height"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fieldsToShowSpinner" android:layout_marginTop="8dp"/>
         <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
@@ -251,51 +155,16 @@
                 app:layout_constraintBottom_toBottomOf="@+id/limit_edittext"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/limit_edittext"/>
-
-        <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Fields to show"
-                app:layout_constraintBottom_toBottomOf="@+id/request_fields_spinner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/request_fields_spinner"/>
-
         <EditText
                 android:id="@+id/limit_edittext"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/orderSpinner"
-                app:layout_constraintStart_toEndOf="@+id/textView11" android:layout_marginStart="8dp"/>
-
-        <EditText
-                android:id="@+id/esclude_webcam_ids_textmultiline"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/properties_view_item_height"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:ems="10"
-                android:inputType="textMultiLine"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/regionSpinner"/>
-
-        <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Webcam info"
-                app:layout_constraintBottom_toBottomOf="@+id/webcam_info_spinner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/webcam_info_spinner"/>
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/orderSpinner"
+                android:text="20"/>
 
         <TextView
                 android:id="@+id/textView15"
@@ -306,6 +175,14 @@
                 app:layout_constraintBottom_toBottomOf="@+id/languageSpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/languageSpinner"/>
+        <Spinner
+                android:id="@+id/languageSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/properties_view_item_height"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/limit_edittext"/>
 
         <Button
                 android:id="@+id/ok_button"
@@ -318,6 +195,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/languageSpinner"/>
+                app:layout_constraintTop_toBottomOf="@+id/languageSpinner" android:layout_marginTop="8dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
