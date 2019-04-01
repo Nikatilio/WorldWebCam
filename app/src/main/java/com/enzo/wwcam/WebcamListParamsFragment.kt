@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.enzo.wwcam.application.WebcamApplication
 import com.enzo.wwcam.wct.WctApi
-import com.enzo.wwcam.wct.params.WctCountry
+import com.enzo.wwcam.wct.params.WctItem
 
 import kotlinx.android.synthetic.main.fragment_webcam_list_params.*
 import javax.inject.Inject
@@ -32,17 +32,33 @@ class WebcamListParamsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        continentSpinner.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.continents)
-        countrySpinner.adapter = ArrayAdapter<WctCountry>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.countries)
-        regionSpinner.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.regions)
-        categorySpinner.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.categories)
-        propertySpinner.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.properties)
+        continentSpinner.adapter = ArrayAdapter<WctItem>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.continents)
+        countrySpinner.adapter = ArrayAdapter<WctItem>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.countries)
+        regionSpinner.adapter = ArrayAdapter<WctItem>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.regions)
+        categorySpinner.adapter = ArrayAdapter<WctItem>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.categories)
+        propertySpinner.adapter = ArrayAdapter<WctItem>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.properties)
         webcamFieldsSpinner.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.webcamFields)
         orderSpinner.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.orderParams)
         fieldsToShowSpinner.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.fieldsToShow)
         languageSpinner.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.languages)
 
+        continentSpinner.onItemSelectedListener = continentSelectedListener
         countrySpinner.onItemSelectedListener = countrySelectedListener
+        regionSpinner.onItemSelectedListener = regionSelectedListener
+        categorySpinner.onItemSelectedListener = categorySelectedListener
+        propertySpinner.onItemSelectedListener = propertySelectedListener
+
+    }
+
+    private val continentSelectedListener = object: AdapterView.OnItemSelectedListener {
+
+        override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            wctApi.setSelectedContinents(arrayOf(continentSpinner.selectedItemPosition))
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
     }
 
     private val countrySelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -55,4 +71,38 @@ class WebcamListParamsFragment: Fragment() {
         }
 
     }
+
+    private val regionSelectedListener = object: AdapterView.OnItemSelectedListener {
+
+        override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            wctApi.setSelectedRegions(arrayOf(regionSpinner.selectedItemPosition))
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+    }
+
+    private val categorySelectedListener = object: AdapterView.OnItemSelectedListener {
+
+        override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            wctApi.setSelectedCategories(arrayOf(categorySpinner.selectedItemPosition))
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+    }
+
+    private val propertySelectedListener = object: AdapterView.OnItemSelectedListener {
+
+        override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            wctApi.setSelectedProperties(arrayOf(propertySpinner.selectedItemPosition))
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+    }
+
 }

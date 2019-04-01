@@ -13,17 +13,22 @@ import javax.inject.Inject
 class WctApiImpl @Inject constructor(val networkManager: NetworkManager): WctApi {
     val url = "https://webcamstravel.p.rapidapi.com/webcams/list/"
 
-    override var categories = ArrayList<String>()
-    override var countries = ArrayList<WctCountry>()
-    override var regions = ArrayList<String>()
-    override var continents = ArrayList<String>()
-    override var properties = ArrayList<String>()
+    override var continents = ArrayList<WctItem>()
+    override var countries = ArrayList<WctItem>()
+    override var regions = ArrayList<WctItem>()
+    override var categories = ArrayList<WctItem>()
+    override var properties = ArrayList<WctItem>()
     override val fieldsToShow = ArrayList<String>()
     override val orderParams = ArrayList<String>()
     override val webcamFields = ArrayList<String>()
     override val languages = ArrayList<String>()
 
-    val selectedCountries = ArrayList<WctCountry>()
+    val selectedCountries = ArrayList<WctItem>()
+    val selectedContinents = ArrayList<WctItem>()
+    val selectedRegions = ArrayList<WctItem>()
+    val selectedCategories = ArrayList<WctItem>()
+    val selectedProperties = ArrayList<WctItem>()
+
 
 
     var excludedIds = ArrayList<String>()
@@ -59,34 +64,56 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager): WctApi
         }
     }
 
-    fun setExcludedWebcamIds(excludedIds: ArrayList<String>) {
-
+    override fun setSelectedContinents(continentIndexes: Array<Int>) {
+        selectedContinents.clear()
+        continentIndexes.forEach { selectedContinents.add(continents[it]) }
     }
 
-    fun getByArea(ne_lat: Double, ne_lng: Double, sw_lat: Double, sw_lng: Double) {
-
+    override fun setSelectedRegions(regionIndexes: Array<Int>) {
+        selectedRegions.clear()
+        regionIndexes.forEach { selectedRegions.add(regions[it]) }
     }
 
-    fun getByContinent(vararg continent: String) {
+    override fun setSelectedCategories(categoryIndexes: Array<Int>) {
+        selectedCategories.clear()
+        categoryIndexes.forEach { selectedCategories.add(regions[it]) }
     }
 
-    fun getByCountry(vararg countries: String) {
-    }
-
-    fun getNearby(lat: Double, lng: Double, radius: Int) {
-    }
-
-    fun getByRegion(vararg regions: String) {
-    }
-
-    fun getByWebcam(vararg webcamIds: String) {
-    }
-
-    fun getWebcamMap(ne_lat: Double, ne_lng: Double, sw_lat: Double, sw_lng: Double, zoom: Int) {
+    override fun setSelectedProperties(propertyIndexes: Array<Int>) {
+        selectedProperties.clear()
+        propertyIndexes.forEach { selectedProperties.add(properties[it]) }
     }
 
     override fun load(callback: (Array<WebcamInfo>) -> Unit) {
-        networkManager.build(url, "/webcams/list/country=" + selectedCountries[0].id, object: Callback<WebcamResponse> {
+
+        var params = ""
+        if (!selectedContinents.isEmpty()) {
+            params += "/continent=" + selectedContinents.joinToString(";") {
+                it.id
+            }
+        }
+        if (!selectedCountries.isEmpty()) {
+            params += "/country=" + selectedCountries.joinToString(";") {
+                it.id
+            }
+        }
+        if (!selectedRegions.isEmpty()) {
+            params += "/region=" + selectedRegions.joinToString(";") {
+                it.id
+            }
+        }
+        if (!selectedCategories.isEmpty()) {
+            params += "/category=" + selectedCategories.joinToString(";") {
+                it.id
+            }
+        }
+        if (!selectedProperties.isEmpty()) {
+            params += "/property=" + selectedProperties.joinToString(";") {
+                it.id
+            }
+        }
+
+        networkManager.build(url, "/webcams/list$params", object: Callback<WebcamResponse> {
             override fun onFailure(call: Call<WebcamResponse>, t: Throwable) {
             }
 
@@ -95,18 +122,6 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager): WctApi
             }
         })
 
-    }
-
-    override fun filterByCountry(country: String) {
-//        networkManager.build(url, "/country=" + country, object: Callback<WebcamResponse> {
-//            override fun onFailure(call: Call<WebcamResponse>, t: Throwable) {
-//
-//            }
-//
-//            override fun onResponse(call: Call<WebcamResponse>, response: Response<WebcamResponse>) {
-//
-//            }
-//        })
     }
 
     private fun loadValues() {
@@ -123,30 +138,30 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager): WctApi
                     val result = response.body()?.result
                     result?.categories?.let {
                         for (category in it) {
-                            categories.add(category.name)
+                            categories.add(WctItem(category.id, category.name))
                         }
-                        propertiesAll.add(categories)
+                        //propertiesAll.add(categories)
                     }
                     result?.properties?.let {
                         for (property in it) {
-                            properties.add(property.name)
+                            properties.add(WctItem(property.id, property.name))
                         }
-                        propertiesAll.add(properties)
+                        //propertiesAll.add(properties)
                     }
                     result?.continents?.let {
                         for (continent in it) {
-                            continents.add(continent.name)
+                            continents.add(WctItem(continent.id, continent.name))
                         }
                     }
                     result?.countries?.let {
                         for (country in it) {
-                            countries.add(WctCountry(country.id, country.name))
+                            countries.add(WctItem(country.id, country.name))
 
                         }
                     }
                     result?.regions?.let {
                         for (region in it) {
-                            regions.add(region.name)
+                            regions.add(WctItem(region.id, region.name))
                         }
                     }
 

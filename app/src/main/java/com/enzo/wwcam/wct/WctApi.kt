@@ -1,35 +1,29 @@
 package com.enzo.wwcam.wct
 
 import com.enzo.wwcam.model.WebcamInfo
-import com.enzo.wwcam.wct.params.WctCountry
+import com.enzo.wwcam.wct.params.WctItem
 import javax.inject.Singleton
 
 @Singleton
 interface WctApi {
 
-    val categories: ArrayList<String>
-
-    val countries: ArrayList<WctCountry>
-
-    val regions: ArrayList<String>
-
-    val continents: ArrayList<String>
-
-    val properties: ArrayList<String>
-
+    val continents: ArrayList<WctItem>
+    val countries: ArrayList<WctItem>
+    val regions: ArrayList<WctItem>
+    val categories: ArrayList<WctItem>
+    val properties: ArrayList<WctItem>
     val fieldsToShow: ArrayList<String>
-
     val orderParams: ArrayList<String>
-
     val webcamFields: ArrayList<String>
-
     val languages: ArrayList<String>
 
     fun prepare()
 
-    fun filterByCountry(country: String)
-
     fun load(callback: (Array<WebcamInfo>) -> Unit)
 
-    fun setSelectedCountries(countryIndexes: Array<Int>)
+    fun setSelectedContinents(countryIndexes: Array<Int>)
+    fun setSelectedCountries(continentIndexes: Array<Int>)
+    fun setSelectedRegions(regionIndexes: Array<Int>)
+    fun setSelectedCategories(categoryIndexes: Array<Int>)
+    fun setSelectedProperties(propertyIndexes: Array<Int>)
 }
