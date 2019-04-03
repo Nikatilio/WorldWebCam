@@ -24,12 +24,12 @@ data class WebcamInfo(
 
 data class ShowParameterInfo(@JsonProperty("id") val id: String, @JsonProperty("name") val name: String, @JsonProperty("count") val count: Int)
 
-data class WebcamImage(val current: WebImageUrl, val daylight: WebImageUrl, val sizes: WebImageSizes, val update: Long, val interval: Int)
+data class WebcamImage(@JsonProperty("current") val current: WebImageUrl, @JsonProperty("daylight") val daylight: WebImageUrl, @JsonProperty("sizes") val sizes: WebImageSizes, @JsonProperty("update") val update: Long, @JsonProperty("interval") val interval: Int)
 
-data class WebImageUrl(val icon: String, val thumbnail: String, val preview: String, val toenail: String)
+data class WebImageUrl(@JsonProperty("icon") val icon: String, @JsonProperty("thumbnail") val thumbnail: String, @JsonProperty("preview") val preview: String, @JsonProperty("toenail") val toenail: String)
 
-data class WebImageSizes(val icon: WebImageSize, val thumbnail: WebImageSize, val preview: WebImageSize, val toenail: WebImageSize)
+data class WebImageSizes(@JsonProperty("icon") val icon: WebImageSize, @JsonProperty("thumbnail") val thumbnail: WebImageSize, @JsonProperty("preview") val preview: WebImageSize, @JsonProperty("toenail") val toenail: WebImageSize)
 
-data class WebImageSize(val width: Int, val height: Int)
+data class WebImageSize(@JsonProperty("width") val width: Int, @JsonProperty("height") val height: Int)
 
-data class WebCamLocation(val city: String, val region: String, val region_code: String, val country: String, val country_code: String, val continent: String, val continent_code: String, val latitude: String, val longitude: String, val timezone: String, val wikipedia: String)
+data class WebCamLocation(@JsonProperty("city") val city: String, @JsonProperty("region") val region: String, @JsonProperty("region_code") val region_code: String, @JsonProperty("country") val country: String, @JsonProperty("country_code") val country_code: String, @JsonProperty("continent") val continent: String, @JsonProperty("continent_code") val continent_code: String, @JsonProperty("latitude") val latitude: String, @JsonProperty("longitude") val longitude: String, @JsonProperty("timezone") val timezone: String, @JsonProperty("wikipedia") val wikipedia: String)

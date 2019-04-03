@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.enzo.wwcam.application.WebcamApplication
@@ -29,6 +31,7 @@ class WebcamListFragment : Fragment() {
 
     private lateinit var webcamAdapter: WebcamAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var model: WebcamListModel
 
     companion object {
@@ -44,17 +47,6 @@ class WebcamListFragment : Fragment() {
 
         model = ViewModelProviders.of(this).get(WebcamListModel::class.java)
         model.wctApi = wctApi
-//        model.getWebCamInfoList().observe(this, Observer {
-//            run {
-//                println("I'm here")
-//                println("Test")
-//            }
-//        })
-//        model.getWebCamInfoList().observe(this, Observer {
-//            it.first.data
-//            println("Test")
-//
-//        })
 
         model.loadWebCamInfo()
         model.webCamInfo.observe(this, Observer<Array<WebcamInfo>> {
@@ -67,7 +59,6 @@ class WebcamListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_webcam_list, container, false)
 
-        linearLayoutManager = LinearLayoutManager(activity)
         webcamAdapter = WebcamAdapter(activity) {
             val intent = Intent(activity, WebcamDetailsActivity::class.java)
             intent.putExtra("WebCamId", it)
@@ -80,7 +71,12 @@ class WebcamListFragment : Fragment() {
 
         val recyclerView = view.findViewById(R.id.webcam_recyclerview) as RecyclerView
 
-        recyclerView.layoutManager = linearLayoutManager
+//        linearLayoutManager = LinearLayoutManager(activity)
+//        recyclerView.layoutManager = linearLayoutManager
+//        recyclerView.adapter = webcamAdapter
+
+        gridLayoutManager = GridLayoutManager(activity, 2)
+        recyclerView.layoutManager = gridLayoutManager
         recyclerView.adapter = webcamAdapter
 
         val settings = view.findViewById<Button>(R.id.settings_button)
@@ -88,6 +84,11 @@ class WebcamListFragment : Fragment() {
             val intent = Intent(activity, WebcamListParamsActivity::class.java)
             startActivityForResult(intent, WEBCAM_LIST_PARAMS)
         }
+
+
+
+//        val webcamCardView = view.findViewById(R.id.webcamCardView) as CardView
+
 
         return view
     }

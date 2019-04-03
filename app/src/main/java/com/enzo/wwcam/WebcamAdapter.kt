@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.enzo.wwcam.model.WebcamInfo
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.webcam_list_item.view.*
 
 
@@ -39,8 +40,10 @@ class WebcamAdapter(private val activity: FragmentActivity?, private val webCamS
 
         fun bindData(webCamInfo: WebcamInfo, webCamSelectListener: (String) -> Unit) {
             this.webCamInfo = webCamInfo
-            view.webcam_name.text = webCamInfo.title
+            view.webcamTitle.text = webCamInfo.title
+            Picasso.get().load(webCamInfo.image?.current?.preview).into(view.webcamPreviewImage)
             view.setOnClickListener { webCamSelectListener(webCamInfo.id) }
+            System.out.println(webCamInfo.image?.current?.preview)
         }
     }
 }

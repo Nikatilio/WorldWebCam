@@ -42,12 +42,26 @@ class WebcamListParamsFragment: Fragment() {
         fieldsToShowSpinner.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.fieldsToShow)
         languageSpinner.adapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, wctApi.languages)
 
+//        continentSpinner.onItemSelectedListener = continentSelectedListener
+//        countrySpinner.onItemSelectedListener = countrySelectedListener
+//        regionSpinner.onItemSelectedListener = regionSelectedListener
+//        categorySpinner.onItemSelectedListener = categorySelectedListener
+//        propertySpinner.onItemSelectedListener = propertySelectedListener
+    }
+
+    override fun onResume() {
+        super.onResume()
+        continentSpinner.setSelection(0, false)
+        countrySpinner.setSelection(0, false)
+        regionSpinner.setSelection(0, false)
+        categorySpinner.setSelection(0, false)
+        propertySpinner.setSelection(0, false)
+
         continentSpinner.onItemSelectedListener = continentSelectedListener
         countrySpinner.onItemSelectedListener = countrySelectedListener
         regionSpinner.onItemSelectedListener = regionSelectedListener
         categorySpinner.onItemSelectedListener = categorySelectedListener
         propertySpinner.onItemSelectedListener = propertySelectedListener
-
     }
 
     private val continentSelectedListener = object: AdapterView.OnItemSelectedListener {

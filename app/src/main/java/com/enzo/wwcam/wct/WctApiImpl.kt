@@ -113,8 +113,14 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager): WctApi
             }
         }
 
-        networkManager.build(url, "/webcams/list$params", object: Callback<WebcamResponse> {
+        if (params.isEmpty()) {
+            System.err.println("Request parameters are empty")
+            return
+        }
+
+        networkManager.build(url, "?show=webcams:image,location;categories/webcams/list$params", object: Callback<WebcamResponse> {
             override fun onFailure(call: Call<WebcamResponse>, t: Throwable) {
+                t.printStackTrace()
             }
 
             override fun onResponse(call: Call<WebcamResponse>, response: Response<WebcamResponse>) {

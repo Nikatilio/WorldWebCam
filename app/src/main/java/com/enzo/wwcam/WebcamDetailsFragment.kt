@@ -27,6 +27,8 @@ class WebcamDetailsFragment: Fragment() {
             indexTextView.text = "Selected webcam $index"
         }
 
+
+
         return view
     }
 }
