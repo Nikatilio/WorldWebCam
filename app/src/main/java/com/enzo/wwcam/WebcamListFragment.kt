@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,13 +14,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.enzo.wwcam.application.WebcamApplication
-import com.enzo.wwcam.dagger.AppComponent
-import com.enzo.wwcam.dagger.DaggerAppComponent
 import com.enzo.wwcam.model.WebcamInfo
 import com.enzo.wwcam.wct.WctApi
+import com.orhanobut.logger.Logger
 import javax.inject.Inject
 
 class WebcamListFragment : Fragment() {
+
+
 
     @Inject lateinit var wctApi: WctApi
 
@@ -43,12 +43,14 @@ class WebcamListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        Logger.d("onCreate")
+
         (activity!!.application as WebcamApplication).appComponent.inject(this)
 
         model = ViewModelProviders.of(this).get(WebcamListModel::class.java)
         model.wctApi = wctApi
 
-        model.loadWebCamInfo()
+        model.loadLastWebcamInfo()
         model.webCamInfo.observe(this, Observer<Array<WebcamInfo>> {
             webcamAdapter.setItems(it)
             webcamAdapter.notifyDataSetChanged()

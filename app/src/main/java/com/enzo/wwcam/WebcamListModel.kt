@@ -29,7 +29,10 @@ class WebcamListModel: ViewModel() {
 
     }
 
-    fun loadWebCamInfo() {
+    fun loadLastWebcamInfo() {
+        wctApi.loadLastCache {
+            webCamInfo.postValue(it)
+        }
 //        Fuel.get("https://webcamstravel.p.rapidapi.com/webcams/list/limit=20", listOf("lang" to "en", "show" to "webcams"))
 //            .header("X-RapidAPI-Key", "50efcd2654msh183733afe64a7cbp14bc4ejsn0d2ef8778562")
 //            .responseString { request, response, result ->
