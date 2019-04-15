@@ -20,6 +20,7 @@ interface WctApi {
     fun prepare()
 
     fun load(callback: (Array<WebcamInfo>) -> Unit)
+    fun loadLastCache(callback: (Array<WebcamInfo>) -> Unit)
 
     fun setSelectedContinents(countryIndexes: Array<Int>)
     fun setSelectedCountries(continentIndexes: Array<Int>)

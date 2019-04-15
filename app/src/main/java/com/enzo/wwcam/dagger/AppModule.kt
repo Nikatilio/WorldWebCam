@@ -1,8 +1,10 @@
 package com.enzo.wwcam.dagger
 
+import android.content.Context
 import com.enzo.wwcam.network.NetworkManager
 import com.enzo.wwcam.wct.WctApi
 import com.enzo.wwcam.wct.WctApiImpl
+import com.enzo.wwcam.wct.WctCacheManager
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -21,8 +23,14 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideWctApi(networkManager: NetworkManager): WctApi {
-        return WctApiImpl(networkManager)
+    fun provideCacheManager(applicationContext: Context): WctCacheManager {
+        return WctCacheManager(applicationContext)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWctApi(networkManager: NetworkManager, cacheManager: WctCacheManager): WctApi {
+        return WctApiImpl(networkManager, cacheManager)
     }
 
 //    @Provides

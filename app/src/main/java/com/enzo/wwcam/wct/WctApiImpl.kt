@@ -1,5 +1,7 @@
 package com.enzo.wwcam.wct
 
+import androidx.room.Room
+import com.enzo.wwcam.database.AppDatabase
 import com.enzo.wwcam.model.WebcamInfo
 import com.enzo.wwcam.model.WebcamResponse
 import com.enzo.wwcam.network.NetworkManager
@@ -10,7 +12,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 
-class WctApiImpl @Inject constructor(val networkManager: NetworkManager): WctApi {
+class WctApiImpl @Inject constructor(val networkManager: NetworkManager, val cacheManager: WctCacheManager): WctApi {
     val url = "https://webcamstravel.p.rapidapi.com/webcams/list/"
 
     override var continents = ArrayList<WctItem>()
@@ -125,9 +127,14 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager): WctApi
 
             override fun onResponse(call: Call<WebcamResponse>, response: Response<WebcamResponse>) {
                 callback(response.body()?.result?.webcams!!)
+
+                cacheManager.save(response.body()?.result?.webcams!!)
             }
         })
+    }
 
+    override fun loadLastCache(callback: (Array<WebcamInfo>) -> Unit) {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun loadValues() {
