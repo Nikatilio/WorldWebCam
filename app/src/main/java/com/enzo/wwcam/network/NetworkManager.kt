@@ -62,4 +62,20 @@ class NetworkManager @Inject constructor() {
         var webcamResponse = webcamList.getList(parameters.joinToString(";"))
         webcamResponse.enqueue(callback)
     }
+
+    fun get(fullUrl: String, callback: Callback<WebcamResponse>) {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(fullUrl)
+            .client(client)
+            .addConverterFactory(JacksonConverterFactory.create())
+            .build()
+
+        val webcamList = retrofit.create<WebcamList>(WebcamList::class.java)
+        var webcamResponse = webcamList.getList("")
+        webcamResponse.enqueue(callback)
+    }
 }

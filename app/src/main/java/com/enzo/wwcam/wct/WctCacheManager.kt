@@ -3,7 +3,12 @@ package com.enzo.wwcam.wct
 import android.content.Context
 import androidx.room.Room
 import com.enzo.wwcam.database.AppDatabase
+import com.enzo.wwcam.database.NetworkCache
 import com.enzo.wwcam.model.WebcamInfo
+import io.reactivex.Maybe
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class WctCacheManager @Inject constructor(applicationContext: Context) {
@@ -17,6 +22,19 @@ class WctCacheManager @Inject constructor(applicationContext: Context) {
         ).build()
     }
 
-    fun save(webcams: Array<WebcamInfo>) {
+    fun save(webcams: String?) {
+
+        db.networkCacheDao().insert(NetworkCache(0, "webcams", webcams)).subscribeOn(Schedulers.io()).subscribeBy(
+            onComplete = {
+                println("YEAH!!")
+            },
+            onError = {
+                println("NONONONO!!")
+            }
+        )
+    }
+
+    fun get(): Maybe<List<NetworkCache>> {
+        return db.networkCacheDao().getAll()
     }
 }

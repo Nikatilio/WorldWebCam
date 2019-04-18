@@ -1,11 +1,14 @@
 package com.enzo.wwcam.wct
 
+import android.annotation.SuppressLint
 import androidx.room.Room
 import com.enzo.wwcam.database.AppDatabase
 import com.enzo.wwcam.model.WebcamInfo
 import com.enzo.wwcam.model.WebcamResponse
 import com.enzo.wwcam.network.NetworkManager
 import com.enzo.wwcam.wct.params.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -128,13 +131,32 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager, val cac
             override fun onResponse(call: Call<WebcamResponse>, response: Response<WebcamResponse>) {
                 callback(response.body()?.result?.webcams!!)
 
-                cacheManager.save(response.body()?.result?.webcams!!)
+                cacheManager.save(response.raw().request().url().toString())
             }
         })
     }
 
+    @SuppressLint("CheckResult")
     override fun loadLastCache(callback: (Array<WebcamInfo>) -> Unit) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        cacheManager.get().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+            if (it.isNotEmpty()) {
+                networkManager.get(it[0].value!!, object: Callback<WebcamResponse> {
+                    override fun onFailure(call: Call<WebcamResponse>, t: Throwable) {
+
+                    }
+
+                    override fun onResponse(call: Call<WebcamResponse>, response: Response<WebcamResponse>) {
+                        if(response.isSuccessful) {
+
+                            callback(response.body()?.result?.webcams!!)
+
+                        } else {
+                            error(response.errorBody().toString())
+                        }
+                    }
+                })
+            }
+        }
     }
 
     private fun loadValues() {
