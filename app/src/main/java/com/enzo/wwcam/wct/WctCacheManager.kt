@@ -18,7 +18,7 @@ class WctCacheManager @Inject constructor(applicationContext: Context) {
     init {
         db = Room.databaseBuilder(
             applicationContext,
-            AppDatabase::class.java, "database-name"
+            AppDatabase::class.java, "world-webcam"
         ).build()
     }
 
@@ -26,10 +26,11 @@ class WctCacheManager @Inject constructor(applicationContext: Context) {
 
         db.networkCacheDao().insert(NetworkCache(0, "webcams", webcams)).subscribeOn(Schedulers.io()).subscribeBy(
             onComplete = {
-                println("YEAH!!")
+                println("Network cache updated")
             },
             onError = {
-                println("NONONONO!!")
+                println("Network cache update error")
+                println(it)
             }
         )
     }

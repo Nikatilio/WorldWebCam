@@ -68,14 +68,21 @@ class NetworkManager @Inject constructor() {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
+        if (!fullUrl.contains(".com/")) {
+            println("Incorrect url: $fullUrl")
+            return
+        }
+
+        val baseUrl = fullUrl.split(".com/")[0] + ".com/"
+
         val retrofit = Retrofit.Builder()
-            .baseUrl(fullUrl)
+            .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(JacksonConverterFactory.create())
             .build()
 
         val webcamList = retrofit.create<WebcamList>(WebcamList::class.java)
-        var webcamResponse = webcamList.getList("")
+        var webcamResponse = webcamList.getList(fullUrl)
         webcamResponse.enqueue(callback)
     }
 }

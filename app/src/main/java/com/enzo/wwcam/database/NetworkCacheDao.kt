@@ -1,9 +1,6 @@
 package com.enzo.wwcam.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import io.reactivex.Completable
 import io.reactivex.Maybe
 
@@ -15,7 +12,7 @@ interface NetworkCacheDao {
     @Query("SELECT * FROM networkCache WHERE name LIKE :name LIMIT 1")
     fun findByName(name: String): NetworkCache
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(networkCache: NetworkCache): Completable
 
     @Delete
