@@ -21,8 +21,6 @@ import javax.inject.Inject
 
 class WebcamListFragment : Fragment() {
 
-
-
     @Inject lateinit var wctApi: WctApi
 
     val WEBCAM_LIST_PARAMS = 1
@@ -63,8 +61,8 @@ class WebcamListFragment : Fragment() {
 
         webcamAdapter = WebcamAdapter(activity) {
             val intent = Intent(activity, WebcamDetailsActivity::class.java)
-            intent.putExtra("WebCamId", it)
 
+            intent.putExtra("WebCamId", it.id)
             startActivity(intent)
         }
 

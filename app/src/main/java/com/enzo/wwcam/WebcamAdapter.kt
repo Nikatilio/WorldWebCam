@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.webcam_list_item.view.*
 
 
 
-class WebcamAdapter(private val activity: FragmentActivity?, private val webCamSelectListener: (String) -> Unit) : RecyclerView.Adapter<WebcamAdapter.WebCamHolder>() {
+class WebcamAdapter(private val activity: FragmentActivity?, private val webCamSelectListener: (WebcamInfo) -> Unit) : RecyclerView.Adapter<WebcamAdapter.WebCamHolder>() {
 
     private val data: MutableList<WebcamInfo> = ArrayList()
 
@@ -38,11 +38,11 @@ class WebcamAdapter(private val activity: FragmentActivity?, private val webCamS
         private var view: View = v
         private lateinit var webCamInfo: WebcamInfo
 
-        fun bindData(webCamInfo: WebcamInfo, webCamSelectListener: (String) -> Unit) {
+        fun bindData(webCamInfo: WebcamInfo, webCamSelectListener: (WebcamInfo) -> Unit) {
             this.webCamInfo = webCamInfo
             view.webcamTitle.text = webCamInfo.title
             Picasso.get().load(webCamInfo.image?.current?.preview).into(view.webcamPreviewImage)
-            view.setOnClickListener { webCamSelectListener(webCamInfo.id) }
+            view.setOnClickListener { webCamSelectListener(webCamInfo) }
             System.out.println(webCamInfo.image?.current?.preview)
         }
     }

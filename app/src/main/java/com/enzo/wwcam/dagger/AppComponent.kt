@@ -28,4 +28,6 @@ interface AppComponent {
     fun inject(target: WebcamListParamsFragment)
 
     fun inject(target: WebcamListFragment)
+
+    fun inject(target: WebcamDetailsFragment)
 }
