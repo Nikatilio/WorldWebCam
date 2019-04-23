@@ -131,6 +131,8 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager, val cac
             override fun onResponse(call: Call<WebcamResponse>, response: Response<WebcamResponse>) {
                 callback(response.body()?.result?.webcams!!)
 
+                cacheManager.save(response.body()?.result?.webcams!!)
+
                 cacheManager.save(response.raw().request().url().toString())
             }
         })
@@ -148,7 +150,7 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager, val cac
                     override fun onResponse(call: Call<WebcamResponse>, response: Response<WebcamResponse>) {
                         if(response.isSuccessful) {
 
-                            cacheManager.save(response.body()?.result?.webcams!!)
+//                            cacheManager.save(response.body()?.result?.webcams!!)
 
                             callback(response.body()?.result?.webcams!!)
 

@@ -1,6 +1,7 @@
 package com.enzo.wwcam.wct
 
 import android.content.Context
+import androidx.annotation.MainThread
 import androidx.room.Room
 import com.enzo.wwcam.database.AppDatabase
 import com.enzo.wwcam.database.NetworkCache
@@ -61,7 +62,7 @@ class WctCacheManager @Inject constructor(applicationContext: Context) {
     }
 
     fun getWebcamCache(id: String, callback: (WebcamInfo) -> Unit) {
-        db.webcamInfoCacheDao().findById(id).subscribeOn(Schedulers.io()).subscribeBy {
+        db.webcamInfoCacheDao().findById(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeBy {
             callback(objectMapper.readValue(it.jsonString, WebcamInfo::class.java))
         }
     }

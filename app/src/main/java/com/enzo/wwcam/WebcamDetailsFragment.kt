@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.widget.TextView
 import com.enzo.wwcam.application.WebcamApplication
 import com.enzo.wwcam.wct.WctApi
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_webcam_details.*
 import javax.inject.Inject
 
 
@@ -31,13 +33,15 @@ class WebcamDetailsFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_webcam_details, container, false)
 
-        val indexTextView = view.findViewById<TextView>(R.id.webcam_index)
+        val indexTextView = view.findViewById<TextView>(R.id.webcamTitle)
 
         val bundle = this.arguments
         if (bundle != null) {
             val index = bundle.getString("WebCamId", "empty id")
 
             wctApi.loadWebcam(index) {
+                webcamTitle.text = it.title
+                Picasso.get().load(it.image?.current?.preview).into(imageView)
                 println("----------------------------------READ ${it.title} from Database!")
             }
 
