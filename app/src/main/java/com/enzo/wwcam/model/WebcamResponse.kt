@@ -24,8 +24,15 @@ data class WebcamInfo(
     @JsonProperty("id") val id: String,
     @JsonProperty("status") val status: String,
     @JsonProperty("title") val title: String,
+    @JsonProperty("category") val category: List<ShowParameterInfo>?,
     @JsonProperty("image") val image: WebcamImage?,
-    @JsonProperty("location") val location: WebCamLocation?
+    @JsonProperty("location") val location: WebcamLocation?,
+    @JsonProperty("map") val map: WebcamMap?,
+    @JsonProperty("player") val player: WebcamPlayer?,
+    @JsonProperty("property") val property: List<ShowParameterInfo>?,
+    @JsonProperty("statistics") val statistics: WebcamStatistics?,
+    @JsonProperty("url") val url: WebcamUrl?,
+    @JsonProperty("user") val user: WebcamUser?
 )
 
 data class ShowParameterInfo(
@@ -40,6 +47,59 @@ data class WebcamImage(
     @JsonProperty("sizes") val sizes: WebImageSizes,
     @JsonProperty("update") val update: Long,
     @JsonProperty("interval") val interval: Int
+)
+
+data class WebcamLocation(
+    @JsonProperty("city") val city: String,
+    @JsonProperty("region") val region: String,
+    @JsonProperty("region_code") val region_code: String,
+    @JsonProperty("country") val country: String,
+    @JsonProperty("country_code") val country_code: String,
+    @JsonProperty("continent") val continent: String,
+    @JsonProperty("continent_code") val continent_code: String,
+    @JsonProperty("latitude") val latitude: String,
+    @JsonProperty("longitude") val longitude: String,
+    @JsonProperty("timezone") val timezone: String,
+    @JsonProperty("wikipedia") val wikipedia: String
+)
+
+data class WebcamMap(
+    @JsonProperty("clustersize") val clustersize: Int
+)
+
+data class WebcamPlayer(
+    @JsonProperty("live") val live: WebcamPlayerItem,
+    @JsonProperty("day") val day: WebcamPlayerItem,
+    @JsonProperty("month") val month: WebcamPlayerItem,
+    @JsonProperty("year") val year: WebcamPlayerItem,
+    @JsonProperty("lifetime") val lifetime: WebcamPlayerItem
+)
+
+data class WebcamPlayerItem(
+    @JsonProperty("available") val available: Boolean,
+    @JsonProperty("link") val link: String?,
+    @JsonProperty("embed") val embed: String?
+)
+
+data class WebcamStatistics(
+    @JsonProperty("views") val views: Long
+)
+
+data class WebcamUrl(
+    @JsonProperty("current") val current: WebcamUrlItem,
+    @JsonProperty("daylight") val daylight: WebcamUrlItem,
+    @JsonProperty("edit") val edit: String
+)
+
+data class WebcamUrlItem(
+    @JsonProperty("desktop") val icon: String,
+    @JsonProperty("mobile") val thumbnail: String
+)
+
+data class WebcamUser(
+    @JsonProperty("id") val id: String,
+    @JsonProperty("name") val name: String,
+    @JsonProperty("url") val url: String
 )
 
 data class WebImageUrl(
@@ -59,18 +119,4 @@ data class WebImageSizes(
 data class WebImageSize(
     @JsonProperty("width") val width: Int,
     @JsonProperty("height") val height: Int
-)
-
-data class WebCamLocation(
-    @JsonProperty("city") val city: String,
-    @JsonProperty("region") val region: String,
-    @JsonProperty("region_code") val region_code: String,
-    @JsonProperty("country") val country: String,
-    @JsonProperty("country_code") val country_code: String,
-    @JsonProperty("continent") val continent: String,
-    @JsonProperty("continent_code") val continent_code: String,
-    @JsonProperty("latitude") val latitude: String,
-    @JsonProperty("longitude") val longitude: String,
-    @JsonProperty("timezone") val timezone: String,
-    @JsonProperty("wikipedia") val wikipedia: String
 )

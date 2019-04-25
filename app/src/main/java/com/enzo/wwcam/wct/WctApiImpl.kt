@@ -123,7 +123,7 @@ class WctApiImpl @Inject constructor(val networkManager: NetworkManager, val cac
             return
         }
 
-        networkManager.build(url, "/webcams/list$params?show=webcams:image,location;categories", object: Callback<WebcamResponse> {
+        networkManager.build(url, "/webcams/list$params?show=webcams:category,image,location,map,player,property,statistics,url,user;categories", object: Callback<WebcamResponse> {
             override fun onFailure(call: Call<WebcamResponse>, t: Throwable) {
                 t.printStackTrace()
             }
