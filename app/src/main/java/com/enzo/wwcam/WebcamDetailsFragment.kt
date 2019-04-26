@@ -52,4 +52,10 @@ class WebcamDetailsFragment: Fragment() {
 
         return view
     }
+
+    override fun onResume() {
+        super.onResume()
+        webView.settings.javaScriptEnabled = true
+        webView.loadUrl("https://api.lookr.com/embed/player/1064226293/day")
+    }
 }

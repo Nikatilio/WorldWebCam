@@ -92,8 +92,8 @@ data class WebcamUrl(
 )
 
 data class WebcamUrlItem(
-    @JsonProperty("desktop") val icon: String,
-    @JsonProperty("mobile") val thumbnail: String
+    @JsonProperty("desktop") val icon: String?,
+    @JsonProperty("mobile") val thumbnail: String?
 )
 
 data class WebcamUser(
