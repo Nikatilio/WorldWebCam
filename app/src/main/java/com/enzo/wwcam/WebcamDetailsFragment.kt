@@ -42,7 +42,12 @@ class WebcamDetailsFragment: Fragment() {
             wctApi.loadWebcam(index) {
                 webcamTitle.text = it.title
                 Picasso.get().load(it.image?.current?.preview).into(imageView)
-                println("----------------------------------READ ${it.title} from Database!")
+                webView.settings.javaScriptEnabled = true
+                if (it.player?.live!!.available) {
+                    webView.loadUrl(it.player?.live!!.embed)
+                } else if (it.player?.day!!.available) {
+                    webView.loadUrl(it.player?.day!!.embed)
+                }
             }
 
             indexTextView.text = "Selected webcam $index"
@@ -51,11 +56,5 @@ class WebcamDetailsFragment: Fragment() {
 
 
         return view
-    }
-
-    override fun onResume() {
-        super.onResume()
-        webView.settings.javaScriptEnabled = true
-        webView.loadUrl("https://api.lookr.com/embed/player/1064226293/day")
     }
 }
